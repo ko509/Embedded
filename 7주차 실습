@@ -1,0 +1,37 @@
+초음파센서를 통한 거리 탐지
+
+<iframe width="640" height="360" src="https://youtu.be/M0LRH1cIKVg" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+
+손바닥을 가까이하면 숫자 크기가 줄어드는 것을 확인할 수 있었습니다.
+
+
+소스 코드
+
+// defines pins numbers
+const int trigPin = 0;
+const int echoPin = 2;
+// defines variables
+long duration;
+int distance;
+void setup() {
+pinMode(trigPin, OUTPUT); // Sets the trigPin
+pinMode(echoPin, INPUT); // Sets the echoPin
+Serial.begin(9600);
+}
+void loop() {
+// Clears the trigPin
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+// Sets the trigPin on HIGH state for 10 micro seconds
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+// Reads the echoPin, returns the sound wave travel time in microseconds
+duration = pulseIn(echoPin, HIGH);
+// Calculating the distance
+distance= duration*0.034/2;
+// Prints the distance on the Serial Monitor
+Serial.print("Distance: ");
+Serial.println(distance);
+delay(2000);
+}
